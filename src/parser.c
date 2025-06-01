@@ -193,7 +193,6 @@ void free_parser(parser_t *parser) {
 }
 
 void free_combinator(parser_t *parser) {
-    // TODO
     switch (parser->tag) {
     case BOTH_TAG:
         free_parser(parser->combinator->Both.first);
@@ -209,9 +208,30 @@ void free_combinator(parser_t *parser) {
         free_parser(parser->combinator->Either.second);
 
         break;
-    default:
-        // NOTE: Panic, should be unreachable
-        exit(255);
+    // NOTE: As of right now, doesn't free stored parsers
+    case SEQUENCE_TAG:
+        /* free_parser(parser->combinator->Sequence) */
+        break;
+    case MAYBE_TAG:
+        free_parser(parser->combinator->Maybe.inner);
+
+        break;
+    case CONSUME_TAG:
+        free_parser(parser->combinator->Consume.inner);
+
+        break;
+    case MANY_TAG:
+        free_parser(parser->combinator->Many.inner);
+
+        break;
+    case MANY1_TAG:
+        free_parser(parser->combinator->Many1.inner);
+
+        break;
+    // A combinator/parser without heap-allocations
+    /* default: */
+    /*     // NOTE: Panic, should be unreachable */
+    /*     exit(255); */
     }
 
     free(parser->combinator);
