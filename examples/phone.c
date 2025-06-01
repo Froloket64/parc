@@ -6,6 +6,8 @@
 
 bool is_phone_number(char *phone);
 
+#ifdef TEST
+
 // Phone format: `[+\d](\d\d\d)-\d\d\d-\d\d-\d\d`
 int main(void) {
     assert(is_phone_number("+1(111)-123-45-67"));
@@ -16,6 +18,19 @@ int main(void) {
 
     return 0;
 }
+
+#else
+
+#include <stdio.h>
+
+int main(void) {
+    printf("There's no interactive interface to this example for now.\n");
+    printf("Try compiling with `make examples-test` or `gcc -D TEST` for a testing version.\n");
+
+    return 1;
+}
+
+#endif
 
 // Implementation using parsing combinators.
 bool is_phone_number(char *phone) {
