@@ -8,14 +8,19 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-/** @brief Full Parser type, containing a tag, specifying which combinator to
-   use (see `union Parser`).
- *  @member tag Combinator tag (see `union Parser`).
- *  @member combinator Pointer to the Combinator.
+/**
+ * @struct TaggedParser
+ * @brief Full Parser type, containing a tag, specifying which combinator to
+ * use (see `union Parser`).
+ *
+ * NOTE: `combinator` doesn't strictly need to be heap-allocated, however all
+ * the provided `free*` functions assume that it is, and will otherwise fail.
+ * Moreover, all combinators assume that their inner Parsers are heap-allocated,
+ * and might otherwise produce unexpected results.
  */
 struct TaggedParser {
-    unsigned tag;
-    union Parser *combinator;
+    unsigned tag; ///< Combinator tag (see `Parser`).
+    union Parser *combinator; ///< Pointer to a **heap-allocated** Combinator.
 };
 
 typedef struct TaggedParser parser_t;
