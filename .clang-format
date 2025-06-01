@@ -1,0 +1,13 @@
+---
+IndentWidth: 4
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: false
+  AfterStruct: false
+  IndentBraces: false
+
+IncludeBlocks: Merge
+SortIncludes: CaseSensitive
+
+AllowShortBlocksOnASingleLine: Empty
