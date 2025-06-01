@@ -54,8 +54,8 @@ int main(int argc, char **argv) {
 #endif
 
 /**
- * @brief Returns a parser for variable assignment
- * @return Parser for variable assignment
+ * @brief Returns a parser for variable assignment.
+ * @return Parser for variable assignment.
  *
  * Input format: `let NAME = VALUE;`, where
     `NAME` is a C identifier,

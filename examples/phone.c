@@ -3,18 +3,30 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
 
-bool is_phone_number(char *phone);
+parser_t *phone_number();
 
 #ifdef TEST
 
-// Phone format: `[+\d](\d\d\d)-\d\d\d-\d\d-\d\d`
 int main(void) {
-    assert(is_phone_number("+1(111)-123-45-67"));
-    assert(is_phone_number("(111)-123-45-67"));
-    assert(!is_phone_number("+1(111)-123-45-67!"));
-    assert(!is_phone_number("amogus"));
-    assert(!is_phone_number("+1(111)-123-4"));
+    parser_t *parser = phone_number();
+    char *input;
+
+    input = "+1(111)-123-45-67";
+    assert(matches(&input, parser));
+
+    input = "(111)-123-45-67";
+    assert(matches(&input, parser));
+
+    input = "+1(111)-123-45-67!";
+    assert(!matches(&input, parser));
+
+    input = "amogus";
+    assert(!matches(&input, parser));
+
+    input = "+1(111)-123-4";
+    assert(!matches(&input, parser));
 
     return 0;
 }
@@ -33,21 +45,28 @@ int main(void) {
 
 #endif
 
-// Implementation using parsing combinators.
-bool is_phone_number(char *phone) {
-    parser_t *parsers[11] = {maybe(both(literal('+'), digit())),
-                             literal('('),
-                             times(3, digit()),
-                             literal(')'),
-                             literal('-'),
-                             times(3, digit()),
-                             literal('-'),
-                             times(2, digit()),
-                             literal('-'),
-                             times(2, digit()),
-                             eof()};
+/**
+ * @brief Returns a parser for phone numbers.
+ * @return Parser for phone numbers.
+ *
+ * Input format: `[+\d](\d\d\d)-\d\d\d-\d\d-\d\d`
+ */
+parser_t *phone_number() {
+    parser_t **parsers = malloc(11 * sizeof(parser_t *));
 
-    return matches(&phone, seq(parsers, sizeof(parsers) / sizeof(*parsers)));
+    parsers[0] = maybe(both(literal('+'), digit()));
+    parsers[1] = literal('(');
+    parsers[2] = times(3, digit());
+    parsers[3] = literal(')');
+    parsers[4] = literal('-');
+    parsers[5] = times(3, digit());
+    parsers[6] = literal('-');
+    parsers[7] = times(2, digit());
+    parsers[8] = literal('-');
+    parsers[9] = times(2, digit());
+    parsers[10] = eof();
+
+    return seq(parsers, 11);
 }
 
 // Implementation using procedural parsing.
