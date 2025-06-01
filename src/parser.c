@@ -228,10 +228,10 @@ void free_combinator(parser_t *parser) {
         free_parser(parser->combinator->Many1.inner);
 
         break;
-    // A combinator/parser without heap-allocations
-    /* default: */
-    /*     // NOTE: Panic, should be unreachable */
-    /*     exit(255); */
+        // A combinator/parser without heap-allocations
+        /* default: */
+        /*     // NOTE: Panic, should be unreachable */
+        /*     exit(255); */
     }
 
     free(parser->combinator);

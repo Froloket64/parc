@@ -19,7 +19,7 @@
  * and might otherwise produce unexpected results.
  */
 struct TaggedParser {
-    unsigned tag; ///< Combinator tag (see `Parser`).
+    unsigned tag;             ///< Combinator tag (see `Parser`).
     union Parser *combinator; ///< Pointer to a **heap-allocated** Combinator.
 };
 
