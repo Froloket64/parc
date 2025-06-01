@@ -105,13 +105,15 @@ struct TaggedParser *eof();
 /** @brief Combinator for applying either `first` or `second`. */
 struct TaggedParser *either(struct TaggedParser *first,
                             struct TaggedParser *second);
-/** @brief Combinator for applying `inner` zero or more times. Also see `many()` */
+/** @brief Combinator for applying `inner` zero or more times. Also see `many()`
+ */
 struct TaggedParser *many(struct TaggedParser *inner);
 /** @brief Combinator for applying `inner` one or more times. */
 struct TaggedParser *many1(struct TaggedParser *inner);
 /* struct TaggedParser *not(struct TaggedParser *inner); */
 
-/** @brief Meta-Combinator that applies `inner` and "consumes" the matched input. */
+/** @brief Meta-Combinator that applies `inner` and "consumes" the matched
+ * input. */
 struct TaggedParser *consume(struct TaggedParser *inner);
 
 #endif // COMBINATORS_H_

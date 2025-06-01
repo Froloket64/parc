@@ -1,8 +1,8 @@
 #include "../include/parser.h"
+#include <assert.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
 
 void free_combinator(parser_t *parser);
 
@@ -119,8 +119,8 @@ bool parse(char **input, parser_t *parser, char *matches_arr[], size_t *n,
         // HACK?
         assert(*input - c_ptr >= 0);
 
-        matches_arr[*n] = calloc((size_t) (*input - c_ptr + 1), sizeof(char));
-        memcpy(matches_arr[*n], c_ptr, (size_t) (*input - c_ptr));
+        matches_arr[*n] = calloc((size_t)(*input - c_ptr + 1), sizeof(char));
+        memcpy(matches_arr[*n], c_ptr, (size_t)(*input - c_ptr));
 
         (*n)++;
 

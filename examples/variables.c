@@ -1,7 +1,7 @@
 #include "../include/parser.h"
 #include <assert.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define ERR_ARGS_N 1
 #define MAX_MATCHES 2

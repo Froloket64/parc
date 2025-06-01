@@ -25,7 +25,8 @@ int main(void) {
 
 int main(void) {
     printf("There's no interactive interface to this example for now.\n");
-    printf("Try compiling with `make examples-test` or `gcc -D TEST` for a testing version.\n");
+    printf("Try compiling with `make examples-test` or `gcc -D TEST` for a "
+           "testing version.\n");
 
     return 1;
 }

@@ -37,7 +37,8 @@ bool parse(char **input, parser_t *parser, char *matches[], size_t *n,
            size_t max_n);
 
 /**
- * @brief Matches `input` against `parser`. As opposed to `parse()` never consumes matches.
+ * @brief Matches `input` against `parser`. As opposed to `parse()` never
+ * consumes matches.
  * @param[in/out] input Input to parse.
  * @param[in] parser Parser to use.
  * @return `true` if the input matched, `false` otherwise.
